@@ -1,0 +1,302 @@
+NETSTAT(8)                                                                 Linux System Administrator's Manual                                                                 NETSTAT(8)
+
+NNAAMMEE
+       netstat - Print network connections, routing tables, interface statistics, masquerade connections, and multicast memberships
+
+SSYYNNOOPPSSIISS
+       nneettssttaatt  [_a_d_d_r_e_s_s___f_a_m_i_l_y___o_p_t_i_o_n_s]  [----ttccpp|--tt]  [----uuddpp|--uu]  [----uuddpplliittee|--UU]  [----ssccttpp|--SS]  [----rraaww|--ww]  [----ll22ccaapp|--22]  [----rrffccoommmm|--ff]  [----lliisstteenniinngg|--ll] [----aallll|--aa] [----nnuummeerriicc|--nn] [----nnuu‐‐
+       mmeerriicc--hhoossttss] [----nnuummeerriicc--ppoorrttss] [----nnuummeerriicc--uusseerrss] [----ssyymmbboolliicc|--NN] [----eexxtteenndd|--ee[----eexxtteenndd|--ee]]] [----ttiimmeerrss|--oo] [----pprrooggrraamm|--pp] [----vveerrbboossee|--vv] [----ccoonnttiinnuuoouuss|--cc]] [----wwiiddee|--WW]
+
+       nneettssttaatt {----rroouuttee|--rr} [_a_d_d_r_e_s_s___f_a_m_i_l_y___o_p_t_i_o_n_s] [----eexxtteenndd|--ee[----eexxtteenndd|--ee]]] [----vveerrbboossee|--vv] [----nnuummeerriicc|--nn] [----nnuummeerriicc--hhoossttss] [----nnuummeerriicc--ppoorrttss] [----nnuummeerriicc--uusseerrss] [----ccoonnttiinnuuoouuss|--cc]
+
+       nneettssttaatt {----iinntteerrffaacceess|--ii} [----aallll|--aa] [----eexxtteenndd|--ee[----eexxtteenndd|--ee]]] [----vveerrbboossee|--vv] [----pprrooggrraamm|--pp] [----nnuummeerriicc|--nn]  [----nnuummeerriicc--hhoossttss]  [----nnuummeerriicc--ppoorrttss]  [----nnuummeerriicc--uusseerrss]  [----ccoonnttiinnuu‐‐
+       oouuss|--cc]
+
+       nneettssttaatt {----ggrroouuppss|--gg} [----nnuummeerriicc|--nn] [----nnuummeerriicc--hhoossttss] [----nnuummeerriicc--ppoorrttss] [----nnuummeerriicc--uusseerrss] [----ccoonnttiinnuuoouuss|--cc]
+
+       nneettssttaatt {----mmaassqquueerraaddee|--MM} [----eexxtteenndd|--ee] [----nnuummeerriicc|--nn] [----nnuummeerriicc--hhoossttss] [----nnuummeerriicc--ppoorrttss] [----nnuummeerriicc--uusseerrss] [----ccoonnttiinnuuoouuss|--cc]
+
+       nneettssttaatt {----ssttaattiissttiiccss|--ss} [----ttccpp|--tt] [----uuddpp|--uu] [----uuddpplliittee|--UU] [----ssccttpp|--SS] [----rraaww|--ww]
+
+       nneettssttaatt {----vveerrssiioonn|--VV}
+
+       nneettssttaatt {----hheellpp|--hh}
+
+       _a_d_d_r_e_s_s___f_a_m_i_l_y___o_p_t_i_o_n_s:
+
+       [--44|----iinneett]  [--66|----iinneett66]  [----pprroottooccooll=={iinneett,iinneett66,uunniixx,iippxx,aaxx2255,nneettrroomm,ddddpp,bblluueettooootthh,  ...  } ] [----uunniixx|--xx] [----iinneett|----iipp|----ttccppiipp] [----aaxx2255] [----xx2255] [----rroossee] [----aasshh] [----bblluueettooootthh]
+       [----iippxx] [----nneettrroomm] [----ddddpp|----aapppplleettaallkk] [----eeccoonneett|----eecc]
+
+NNOOTTEESS
+       This program is mostly obsolete.  Replacement for nneettssttaatt is ssss.  Replacement for nneettssttaatt --rr is iipp rroouuttee.  Replacement for nneettssttaatt --ii is iipp --ss lliinnkk.  Replacement for  nneettssttaatt  --gg
+       is iipp mmaaddddrr.
+
+DDEESSCCRRIIPPTTIIOONN
+       NNeettssttaatt prints information about the Linux networking subsystem.  The type of information printed is controlled by the first argument, as follows:
+
+   ((nnoonnee))
+       By default, nneettssttaatt displays a list of open sockets.  If you don't specify any address families, then the active sockets of all configured address families will be printed.
+
+   ----rroouuttee,, --rr
+       Display the kernel routing tables. See the description in rroouuttee(8) for details.  nneettssttaatt --rr and rroouuttee --ee produce the same output.
+
+   ----ggrroouuppss,, --gg
+       Display multicast group membership information for IPv4 and IPv6.
+
+   ----iinntteerrffaacceess,, --ii
+       Display a table of all network interfaces.
+
+   ----mmaassqquueerraaddee,, --MM
+       Display a list of masqueraded connections.
+
+   ----ssttaattiissttiiccss,, --ss
+       Display summary statistics for each protocol.
+
+OOPPTTIIOONNSS
+   ----vveerrbboossee,, --vv
+       Tell the user what is going on by being verbose. Especially print some useful information about unconfigured address families.
+
+   ----wwiiddee,, --WW
+       Do not truncate IP addresses by using output as wide as needed. This is optional for now to not break existing scripts.
+
+   ----nnuummeerriicc,, --nn
+       Show numerical addresses instead of trying to determine symbolic host, port or user names.
+
+   ----nnuummeerriicc--hhoossttss
+       shows numerical host addresses but does not affect the resolution of port or user names.
+
+   ----nnuummeerriicc--ppoorrttss
+       shows numerical port numbers but does not affect the resolution of host or user names.
+
+   ----nnuummeerriicc--uusseerrss
+       shows numerical user IDs but does not affect the resolution of host or port names.
+
+   ----pprroottooccooll==_f_a_m_i_l_y, --AA
+       Specifies  the address families (perhaps better described as low level protocols) for which connections are to be shown.  _f_a_m_i_l_y is a comma (',') separated list of address family
+       keywords like iinneett, iinneett66, uunniixx, iippxx, aaxx2255, nneettrroomm, eeccoonneett, ddddpp, and bblluueettooootthh.  This has the same effect as using the ----iinneett|--44, ----iinneett66|--66, ----uunniixx|--xx, ----iippxx, ----aaxx2255,  ----nneettrroomm,
+       ----ddddpp, and ----bblluueettooootthh options.
+
+       The address family iinneett (Iv4) includes raw, udp, udplite and tcp protocol sockets.
+
+       The address family bblluueettooootthh (Iv4) includes l2cap and rfcomm protocol sockets.
+
+   --cc,, ----ccoonnttiinnuuoouuss
+       This will cause nneettssttaatt to print the selected information every second continuously.
+
+   --ee,, ----eexxtteenndd
+       Display additional information.  Use this option twice for maximum detail.
+
+   --oo,, ----ttiimmeerrss
+       Include information related to networking timers.
+
+   --pp,, ----pprrooggrraamm
+       Show the PID and name of the program to which each socket belongs.
+
+   --ll,, ----lliisstteenniinngg
+       Show only listening sockets.  (These are omitted by default.)
+
+   --aa,, ----aallll
+       Show both listening and non-listening sockets.  With the ----iinntteerrffaacceess option, show interfaces that are not up
+
+   --FF
+       Print routing information from the FIB.  (This is the default.)
+
+   --CC
+       Print routing information from the route cache.
+
+OOUUTTPPUUTT
+   AAccttiivvee IInntteerrnneett ccoonnnneeccttiioonnss (TCP, UDP, UDPLite, raw)
+   PPrroottoo
+       The protocol (tcp, udp, udpl, raw) used by the socket.
+
+   RReeccvv--QQ
+       Established: The count of bytes not copied by the user program connected to this socket.  Listening: Since Kernel 2.6.18 this column contains the current syn backlog.
+
+   SSeenndd--QQ
+       Established: The count of bytes not acknowledged by the remote host.  Listening: Since Kernel 2.6.18 this column contains the maximum size of the syn backlog.
+
+   LLooccaall AAddddrreessss
+       Address  and port number of the local end of the socket.  Unless the ----nnuummeerriicc (--nn) option is specified, the socket address is resolved to its canonical host name (FQDN), and the
+       port number is translated into the corresponding service name.
+
+   FFoorreeiiggnn AAddddrreessss
+       Address and port number of the remote end of the socket.  Analogous to "Local Address".
+
+   SSttaattee
+       The state of the socket. Since there are no states in raw mode and usually no states used in UDP and UDPLite, this column may be left blank. Normally this can be one  of  several
+       values:
+
+       _E_S_T_A_B_L_I_S_H_E_D
+              The socket has an established connection.
+
+       _S_Y_N___S_E_N_T
+              The socket is actively attempting to establish a connection.
+
+       _S_Y_N___R_E_C_V
+              A connection request has been received from the network.
+
+       _F_I_N___W_A_I_T_1
+              The socket is closed, and the connection is shutting down.
+
+       _F_I_N___W_A_I_T_2
+              Connection is closed, and the socket is waiting for a shutdown from the remote end.
+
+       _T_I_M_E___W_A_I_T
+              The socket is waiting after close to handle packets still in the network.
+
+       _C_L_O_S_E  The socket is not being used.
+
+       _C_L_O_S_E___W_A_I_T
+              The remote end has shut down, waiting for the socket to close.
+
+       _L_A_S_T___A_C_K
+              The remote end has shut down, and the socket is closed. Waiting for acknowledgement.
+
+       _L_I_S_T_E_N The socket is listening for incoming connections.  Such sockets are not included in the output unless you specify the ----lliisstteenniinngg (--ll) or ----aallll (--aa) option.
+
+       _C_L_O_S_I_N_G
+              Both sockets are shut down but we still don't have all our data sent.
+
+       _U_N_K_N_O_W_N
+              The state of the socket is unknown.
+
+   UUsseerr
+       The username or the user id (UID) of the owner of the socket.
+
+   PPIIDD//PPrrooggrraamm nnaammee
+       Slash-separated  pair  of  the  process id (PID) and process name of the process that owns the socket.  ----pprrooggrraamm causes this column to be included.  You will also need _s_u_p_e_r_u_s_e_r
+       privileges to see this information on sockets you don't own.  This identification information is not yet available for IPX sockets.
+
+   TTiimmeerr
+       (this needs to be written)
+
+   AAccttiivvee UUNNIIXX ddoommaaiinn SSoocckkeettss
+   PPrroottoo
+       The protocol (usually unix) used by the socket.
+
+   RReeffCCnntt
+       The reference count (i.e. attached processes via this socket).
+
+   FFllaaggss
+       The flags displayed is SO_ACCEPTON (displayed as AACCCC), SO_WAITDATA (WW) or SO_NOSPACE (NN).  SO_ACCECPTON is used on unconnected sockets if their corresponding processes are  wait‐
+       ing for a connect request. The other flags are not of normal interest.
+
+   TTyyppee
+       There are several types of socket access:
+
+       _S_O_C_K___D_G_R_A_M
+              The socket is used in Datagram (connectionless) mode.
+
+       _S_O_C_K___S_T_R_E_A_M
+              This is a stream (connection) socket.
+
+       _S_O_C_K___R_A_W
+              The socket is used as a raw socket.
+
+       _S_O_C_K___R_D_M
+              This one serves reliably-delivered messages.
+
+       _S_O_C_K___S_E_Q_P_A_C_K_E_T
+              This is a sequential packet socket.
+
+       _S_O_C_K___P_A_C_K_E_T
+              Raw interface access socket.
+
+       _U_N_K_N_O_W_N
+              Who ever knows what the future will bring us - just fill in here :-)
+
+   SSttaattee
+       This field will contain one of the following Keywords:
+
+       _F_R_E_E   The socket is not allocated
+
+       _L_I_S_T_E_N_I_N_G
+              The socket is listening for a connection request.  Such sockets are only included in the output if you specify the ----lliisstteenniinngg (--ll) or ----aallll (--aa) option.
+
+       _C_O_N_N_E_C_T_I_N_G
+              The socket is about to establish a connection.
+
+       _C_O_N_N_E_C_T_E_D
+              The socket is connected.
+
+       _D_I_S_C_O_N_N_E_C_T_I_N_G
+              The socket is disconnecting.
+
+       _(_e_m_p_t_y_)
+              The socket is not connected to another one.
+
+       _U_N_K_N_O_W_N
+              This state should never happen.
+
+   PPIIDD//PPrrooggrraamm nnaammee
+       Process ID (PID) and process name of the process that has the socket open.  More info available in AAccttiivvee IInntteerrnneett ccoonnnneeccttiioonnss section written above.
+
+   PPaatthh
+       This is the path name as which the corresponding processes attached to the socket.
+
+   AAccttiivvee IIPPXX ssoocckkeettss
+       (this needs to be done by somebody who knows it)
+
+   AAccttiivvee NNEETT//RROOMM ssoocckkeettss
+       (this needs to be done by somebody who knows it)
+
+   AAccttiivvee AAXX..2255 ssoocckkeettss
+       (this needs to be done by somebody who knows it)
+
+FFIILLEESS
+       _/_e_t_c_/_s_e_r_v_i_c_e_s -- The services translation file
+
+       _/_p_r_o_c -- Mount point for the proc filesystem, which gives access to kernel status information via the following files.
+
+       _/_p_r_o_c_/_n_e_t_/_d_e_v -- device information
+
+       _/_p_r_o_c_/_n_e_t_/_r_a_w -- raw socket information
+
+       _/_p_r_o_c_/_n_e_t_/_t_c_p -- TCP socket information
+
+       _/_p_r_o_c_/_n_e_t_/_u_d_p -- UDP socket information
+
+       _/_p_r_o_c_/_n_e_t_/_u_d_p_l_i_t_e -- UDPLite socket information
+
+       _/_p_r_o_c_/_n_e_t_/_i_g_m_p -- IGMP multicast information
+
+       _/_p_r_o_c_/_n_e_t_/_u_n_i_x -- Unix domain socket information
+
+       _/_p_r_o_c_/_n_e_t_/_i_p_x -- IPX socket information
+
+       _/_p_r_o_c_/_n_e_t_/_a_x_2_5 -- AX25 socket information
+
+       _/_p_r_o_c_/_n_e_t_/_a_p_p_l_e_t_a_l_k -- DDP (appletalk) socket information
+
+       _/_p_r_o_c_/_n_e_t_/_n_r -- NET/ROM socket information
+
+       _/_p_r_o_c_/_n_e_t_/_r_o_u_t_e -- IP routing information
+
+       _/_p_r_o_c_/_n_e_t_/_a_x_2_5___r_o_u_t_e -- AX25 routing information
+
+       _/_p_r_o_c_/_n_e_t_/_i_p_x___r_o_u_t_e -- IPX routing information
+
+       _/_p_r_o_c_/_n_e_t_/_n_r___n_o_d_e_s -- NET/ROM nodelist
+
+       _/_p_r_o_c_/_n_e_t_/_n_r___n_e_i_g_h -- NET/ROM neighbours
+
+       _/_p_r_o_c_/_n_e_t_/_i_p___m_a_s_q_u_e_r_a_d_e -- masqueraded connections
+
+       _/_s_y_s_/_k_e_r_n_e_l_/_d_e_b_u_g_/_b_l_u_e_t_o_o_t_h_/_l_2_c_a_p -- Bluetooth L2CAP information
+
+       _/_s_y_s_/_k_e_r_n_e_l_/_d_e_b_u_g_/_b_l_u_e_t_o_o_t_h_/_r_f_c_o_m_m -- Bluetooth serial connections
+
+       _/_p_r_o_c_/_n_e_t_/_s_n_m_p -- statistics
+
+SSEEEE AALLSSOO
+       rroouuttee(8), iiffccoonnffiigg(8), iippttaabblleess(8), pprroocc(5) ssss(8) iipp(8)
+
+BBUUGGSS
+       Occasionally strange information may appear if a socket changes as it is viewed. This is unlikely to occur.
+
+AAUUTTHHOORRSS
+       The  netstat  user interface was written by Fred Baumgarten <dc6iq@insu1.etec.uni-karlsruhe.de>, the man page basically by Matt Welsh <mdw@tc.cornell.edu>. It was updated by Alan
+       Cox <Alan.Cox@linux.org>, updated again by Tuan Hoang <tqhoang@bigfoot.com>. The man page and the command included in the net-tools package is totally rewritten by  Bernd  Ecken‐
+       fels <ecki@linux.de>.  UDPLite options were added by Brian Micek <bmicek@gmail.com>
+
+net-tools                                                                               2014-10-07                                                                             NETSTAT(8)
