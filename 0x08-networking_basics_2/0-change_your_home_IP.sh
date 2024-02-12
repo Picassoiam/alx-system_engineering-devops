@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-# Configures an Ubuntu server as follows:
-#   - localhost resolves to 127.0.0.2
-#   - facebook.com resolves to 8.8.8.8
 
-cp /etc/hosts ~/hosts.new
-echo "127.0.0.2		localhost" > ~/hosts.new
-echo "8.8.8.8		facebook.com" >> ~/hosts.new
-cp -f ~/hosts.new /etc/hosts
+# Add the custom entries to the /etc/hosts file
+echo "127.0.0.2   localhost" | sudo tee -a /etc/hosts
+echo "8.8.8.8     facebook.com" | sudo tee -a /etc/hosts
+
+# Restart the DNS resolver service to apply the changes
+sudo systemctl restart systemd-resolved
