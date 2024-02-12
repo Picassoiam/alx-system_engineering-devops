@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-# Add the custom entries to the /etc/hosts file
-echo "127.0.0.2   localhost" | sudo tee -a /etc/hosts
-echo "8.8.8.8     facebook.com" | sudo tee -a /etc/hosts
-
-# Restart the DNS resolver service to apply the changes
-sudo systemctl restart systemd-resolved
+# 1. Copy the existing hosts file to a new file called hosts.new
+# 2. Write the new IP address and hostname to the hosts.new file
+# 3. Copy the hosts.new file to the /etc/hosts file
+cp /etc/hosts ~/hosts.new
+echo "127.0.0.2 localhost" > ~/hosts.new
+echo "8.8.8.8  facebook.com" >> ~/hosts.new
+cp -f ~/hosts.new /etc/hosts
