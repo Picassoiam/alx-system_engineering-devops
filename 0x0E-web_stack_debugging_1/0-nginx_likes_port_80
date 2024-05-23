@@ -1,9 +1,54 @@
 #!/usr/bin/env bash
-# nginx server configuration to listen on port 80
 
-# remove default nginx file config
-rm /etc/nginx/sites-enabled/default
-# nginx config  to listen on port 80 for ll IPV4 Ips
-ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-# nginx start
-service nginx restart
+# Update package lists and install necessary tools
+sudo apt-get -y update
+sudo apt-get -y install nginx net-tools
+
+# Ensure UFW is allowing Nginx HTTP
+sudo ufw allow 'Nginx HTTP'
+
+# Create a simple HTML file
+echo "Hello World" | sudo tee /var/www/html/index.html
+
+# Check Nginx configuration
+NGINX_CONF='/etc/nginx/sites-available/default'
+if ! grep -q 'listen 80' "$NGINX_CONF"; then
+  echo "Configuring Nginx to listen on port 80"
+  sudo sed -i '/server {/a \    listen 80 default_server;\n    listen [::]:80 default_server;' "$NGINX_CONF"
+fi
+
+# Check if Nginx is running and restart it if necessary
+if ! sudo systemctl is-active --quiet nginx; then
+  echo "Starting Nginx"
+  sudo systemctl start nginx
+else
+  echo "Restarting Nginx"
+  sudo systemctl restart nginx
+fi
+
+# Verify Nginx is listening on port 80
+if ! sudo netstat -tuln | grep -q ':80 .*nginx'; then
+  echo "Nginx is not listening on port 80. Checking for conflicts..."
+  
+  # Check if another service is using port 80
+  PORT_80_SERVICE=$(sudo netstat -tuln | grep ':80' | awk '{print $7}' | cut -d'/' -f2)
+  if [ -n "$PORT_80_SERVICE" ]; then
+    echo "Port 80 is occupied by $PORT_80_SERVICE. Stopping the service..."
+    sudo systemctl stop "$PORT_80_SERVICE"
+    sudo systemctl disable "$PORT_80_SERVICE"
+  fi
+  
+  # Restart Nginx to ensure it can bind to port 80
+  echo "Restarting Nginx to bind to port 80"
+  sudo systemctl restart nginx
+fi
+
+# Ensure Nginx is enabled to start on boot
+sudo systemctl enable nginx
+
+# Final check
+if sudo netstat -tuln | grep -q ':80 .*nginx'; then
+  echo "Nginx is successfully listening on port 80"
+else
+  echo "Failed to configure Nginx to listen on port 80"
+fi
