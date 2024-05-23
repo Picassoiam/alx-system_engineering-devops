@@ -1,20 +1,9 @@
 #!/usr/bin/env bash
-
-# Update package lists
+#Configure a new Nginx server so that /redirect_me is redirecting to another page
 sudo apt-get -y update
-
-# Install Nginx
 sudo apt-get -y install nginx
-
-# Allow Nginx through the firewall
 sudo ufw allow 'Nginx HTTP'
-
-# Create a simple HTML file
-echo "Hello World" | sudo tee /var/www/html/index.html
-
-# Configure Nginx to redirect /redirect_me to YouTube
-sudo sed -i '/server_name _;/a \ \ \ \ location /redirect_me {\n \ \ \ \ \ \ \ \ return 301 https://www.youtube.com/;\n \ \ \ \ }' /etc/nginx/sites-available/default
-
-# Restart Nginx to apply changes
+echo "Hello World" | sudo tee /var/www/html/index
+sudo sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/ permanent;' /etc/nginx/sites-available/default
 sudo service nginx restart
 
