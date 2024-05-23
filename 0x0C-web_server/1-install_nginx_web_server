@@ -13,3 +13,4 @@ echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
 # Starting nginx
 sudo service nginx start
+
