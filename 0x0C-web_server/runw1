@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-#code to spinup new server instance
-ssh  ubuntu@3.86.18.220
